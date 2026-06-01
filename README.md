@@ -1,14 +1,14 @@
 # 4-BIT-RIPPLE-COUNTER
 
-**AIM:**
+## AIM:
 
 To implement  4 Bit Ripple Counter using verilog and validating their functionality using their functional tables
 
-**SOFTWARE REQUIRED:**
+## SOFTWARE REQUIRED:
 
 Quartus prime
 
-**THEORY**
+## THEORY
 
 **4 Bit Ripple Counter**
 
@@ -22,19 +22,57 @@ In timing diagram Q0 is changing as soon as the negative edge of clock pulse is 
 
 ![image](https://github.com/naavaneetha/4-BIT-RIPPLE-COUNTER/assets/154305477/85e1958a-2fc1-49bb-9a9f-d58ccbf3663c)
 
-**Procedure**
+## Procedure
 
-/* write all the steps invloved */
+Step 1: Start the program and declare the inputs, outputs, clock, and reset signals for the 4-bit ripple counter.
 
-**PROGRAM**
+Step 2: Write the Verilog code using flip-flops connected in cascade to perform ripple counting operation.
 
-/* Program for 4 Bit Ripple Counter and verify its truth table in quartus using Verilog programming.
+Step 3: Apply clock pulses and observe the binary count sequence at the output.
 
- Developed by: RegisterNumber:
-*/
+Step 4: Simulate the design in Quartus/ModelSim and verify the counter outputs using the functional table and waveform.
 
-**RTL LOGIC FOR 4 Bit Ripple Counter**
+## PROGRAM
 
-**TIMING DIGRAMS FOR 4 Bit Ripple Counter**
+Developed by: ADITHYA NM
 
-**RESULTS**
+RegisterNumber: 212225040011
+
+ ```
+module Exp12(q, clk, reset); 
+output [3:0] q;
+input clk, reset;
+T_FF tffo(q[0], clk, reset); 
+T_FF tff1(q[1], q[0], reset); 
+T_FF tff2(q[2], q[1], reset); 
+T_FF tff3(q[3], q[2], reset); 
+endmodule
+
+module D_FF(q, d, clk, reset); 
+output q;
+input d, clk, reset;
+reg q;
+always @(posedge reset or negedge clk)
+ if (reset)
+q = 1'b0;
+ else
+q = d;
+endmodule
+
+module T_FF(q, clk, reset);
+output q;
+input clk, reset;
+wire d;
+D_FF dff0(q, d, clk, reset);
+not n1(d, q); 
+endmodule
+```
+
+## RTL LOGIC FOR 4 Bit Ripple Counter
+<img width="1920" height="1080" alt="6de" src="https://github.com/user-attachments/assets/eea03ecd-75ee-4b54-999a-f40ff5465bea" />
+
+## TIMING DIGRAMS FOR 4 Bit Ripple Counter
+<img width="1920" height="1080" alt="7de" src="https://github.com/user-attachments/assets/bc59449b-c3be-4cc9-8470-c247b9f22bc3" />
+
+## RESULTS
+This Verilog code implements a 4-bit asynchronous (ripple) binary counter using T flip-flops.
